@@ -1,0 +1,66 @@
+schema_version: '1.0'
+status: DRAFT
+
+execution:
+  run_id: REPLACE_ME
+  project_id: REPLACE_ME
+  project_spec_version: '0.1'
+  ai_profile_id: REPLACE_ME
+  ai_profile_version: REPLACE_ME
+  base_commit: REPLACE_WITH_40_CHAR_COMMIT
+  current_commit: REPLACE_WITH_40_CHAR_COMMIT
+  phase: INTAKE
+  state: BLOCKED
+
+scope:
+  active_slice: REPLACE_ME
+  read: []
+  write: []
+  forbidden: []
+
+completed: []
+failed: []
+blocked:
+  - code: HUMAN_SPEC_LOCK_REQUIRED
+    evidence: []
+
+claims:
+  verified_automated: []
+  verified_human: []
+  human_attested: []
+  inferred: []
+  unverified: []
+  withheld: []
+
+unknowns: []
+
+evidence:
+  - id: E00
+    type: NONE
+    classification: UNVERIFIED
+    reference: null
+    bound_commit: null
+
+usage:
+  cycles_used: 0
+  maximum_cycles: 5
+  repeat_failures_without_new_evidence: 0
+  loaded_skills: []
+
+rollback:
+  available: true
+  commit: REPLACE_WITH_40_CHAR_COMMIT
+  instructions: revert_bounded_commit_or_close_unmerged_pr
+
+next_action:
+  task: obtain_human_specification_lock
+  human_required: true
+  allowed_changes: []
+
+stop_conditions:
+  - scope_violation
+  - secret_detected
+  - evidence_mismatch
+  - rollback_unavailable
+  - authority_boundary_unclear
+  - usage_budget_exhausted
