@@ -1,79 +1,73 @@
-# rts-dev-protocol Next Actions
+# RTS Development Kernel — Next Actions
 
-The next goal is an inventory pass, not implementation expansion.
+The architecture direction is approved. The next work is bounded contract completion and non-core validation, not ecosystem-wide rollout.
 
-## Next Tasks
+## Current sequence
 
-1. List existing development procedures, prompts, checklists, and protocol notes.
-2. Identify which materials are ready, draft, stale, duplicate, risky, or misplaced.
-3. Confirm which procedures apply globally and which are repository-specific.
-4. Separate facts, assumptions, unverified material, risks, and open questions.
-5. Convert useful patterns into implementation-neutral development protocols.
-6. Check local documentation links.
-7. Decide which development protocol materials should remain here and which belong in adjacent repositories.
+1. Review the Kernel architecture and Core Constitution for internal contradictions.
+2. Validate YAML syntax and required-field consistency across contracts/templates.
+3. Complete the thin repository-adapter template.
+4. Update the derived read-only HTML view.
+5. Keep Draft PR reviewable; do not merge automatically.
+6. Select one non-core sandbox repository.
+7. Add only a version-pinned thin adapter and local PROJECT/STATE/TESTS files.
+8. Run one bounded no-runtime-change task.
+9. Force an interruption and reconstruct from STATE in another AI/chat.
+10. Run the same compatibility surface with an alternate AI or tool adapter.
+11. Compare usage, scope drift, evidence quality, rollback, and restart success.
+12. Approve, revise, or reject expansion to the next repository class.
 
-## Suggested Follow-up Files
+## Rollout order
 
 ```text
-docs/inventory/dev_protocol_inventory.md
-docs/contracts/implementation_contract.md
-docs/checklists/pr_review_checklist.md
-docs/relations/adjacent_repo_boundaries.md
+SANDBOX
+→ COMPONENT
+→ PRODUCT
+→ RUNTIME
+→ GOVERNANCE
+→ TRUST_CORE
 ```
 
-## Inventory Categories
+Each repository receives its own branch, evidence, rollback point, and human decision. No automatic cross-repository synchronization or mutation is permitted.
 
-Use these labels during the next pass:
+## RTS boundary
 
-- READY: usable as reusable development protocol
-- DRAFT: useful but incomplete
-- STALE: likely outdated or superseded
-- DUPLICATE: overlaps another protocol or checklist
-- RISKY: could change runtime, product, deployment, or business behavior if followed blindly
-- MOVE: belongs in another repository
-- ARCHIVE: preserve for history only
+RTS is `TRUST_CORE` and is last in rollout order.
 
-## Development Protocol Review Checklist
+Before an RTS proposal:
 
-Each development protocol item should explicitly describe:
+- RTS Stage 2 classification/reference analysis must be complete;
+- candidate paths and overlapping semantics must be reviewed;
+- a fixed RTS base commit and rollback must be recorded;
+- a human must authorize Gate A (isolated proposal only);
+- read-only/fail-closed tests and byte-invariance checks must pass;
+- a second human decision must authorize merge/canonical adoption.
 
-- name
-- path
-- purpose
-- applicable repositories
-- required inputs
-- allowed outputs
-- prohibited actions
-- review requirement
-- rollback note
-- next smallest safe action
+Kernel approval does not equal RTS approval.
 
-If a protocol implies direct deployment, live mutation, customer contact, secret handling, or broad repository changes, mark it as `RISKY` and do not expand it until reviewed.
+## Validation checklist for this Draft PR
 
-## Do Not Do Yet
+- [ ] all Markdown links point to existing branch files;
+- [ ] YAML files parse successfully;
+- [ ] required statuses and authority fields are consistent;
+- [ ] old “RTS adoption” framing is absent;
+- [ ] RTS is represented as a development-time `TRUST_CORE` adapter;
+- [ ] RTS runtime/reconstruction independence is explicit;
+- [ ] self-development is allowed but self-approval is prohibited;
+- [ ] HTML is derived, self-contained, and network-free;
+- [ ] no runtime, product, deployment, secret, customer, or canonical RTS behavior is added;
+- [ ] the PR remains Draft until human review.
 
-Do not:
+## Do not do yet
 
-- add product implementation code
-- add runtime execution code
-- add deployment automation
-- add secrets, API keys, or credentials
-- import canonical RTS records
-- rewrite all development procedures at once
-- promote a protocol to mandatory ecosystem-wide status without review
+- do not modify RTS;
+- do not implement RTS-AGE runtime behavior;
+- do not deploy a synchronization service;
+- do not copy the Kernel wholesale into connected repositories;
+- do not mutate multiple repositories in one operation;
+- do not merge or mark the Draft ready automatically;
+- do not treat test success as human approval.
 
-## Next Recommended Task
+## Next bounded implementation task
 
-Create `docs/inventory/dev_protocol_inventory.md`.
-
-That file should list each known development procedure or checklist with:
-
-1. name
-2. path
-3. purpose
-4. status label
-5. applicable repo or repo class
-6. required inputs
-7. allowed outputs
-8. risk
-9. next smallest safe action
+Complete and validate the Kernel Draft PR, then prepare one `SANDBOX` pilot adapter proposal. Stop before modifying the sandbox until the Draft contract review is complete.
