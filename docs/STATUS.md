@@ -1,73 +1,76 @@
 # rts-dev-protocol Status
 
-Status: PARTS / DEV-PROTOCOL / INVENTORY NEEDED
+Status: DEVELOPMENT KERNEL / DESIGN APPROVED / IMPLEMENTATION DRAFT
 
-rts-dev-protocol is the development protocol and AI implementation procedure shelf for the RTS ecosystem.
+## Current position
 
-It is a component repository, not RTS core.
+This repository is the home of the RTS Development Kernel, the development foundation used to prepare, constrain, test, evidence, pause, resume, and hand off work across RTS-related repositories.
 
-It is not RTS-AGE.
+The design direction was explicitly selected on 2026-08-04. Repository merge, rollout, and connected-repository changes remain separately human-gated.
 
-It is not a runtime implementation repository.
+## Ecosystem boundary
 
-It is not a product repository.
+### RTS
 
-It is not a business workflow repository.
+RTS is the separate trust and reconstruction foundation. It owns canonical decision, authority, evidence, transition, checkpoint, integrity, and reconstruction rules.
 
-## Current Position
+RTS is not changed by the current Kernel Draft PR. RTS must remain independently usable without this repository or any provider/runtime adapter.
 
-This repository should hold reusable development procedures that help AI-assisted work remain reviewable, scoped, and reversible.
+### RTS Development Kernel
 
-Its purpose is to define how work should be prepared, constrained, reviewed, and handed off across RTS-related repositories.
+This repository owns:
 
-Allowed by default:
+- core development constitution;
+- work/project/state/test/evidence contracts;
+- AI/tool/execution/repository adapter contracts;
+- model and software migration policy;
+- repository protection classes;
+- human authority and stopping rules;
+- reviewable templates and derived read-only views.
 
-- document AI implementation contracts
-- add PR review checklists
-- add repository rescue procedures
-- document Codex task boundaries
-- document safe branch, PR, and merge patterns
-- document review-first and rollback-cheap development procedures
-- separate facts, assumptions, unverified material, risks, and open questions
+### RTS-AGE
 
-Prohibited by default:
+RTS-AGE is a replaceable execution engine that may later run approved Kernel contracts. It cannot manufacture approval or canonical RTS state.
 
-- adding product implementation code
-- adding runtime implementation code
-- adding RTS core canonical records
-- adding secrets or credentials
-- adding connector implementation
-- adding business delivery workflows
-- turning this repository into RTS-AGE
-- turning this repository into a deployment system
-- broad refactors without an inventory decision
+### Connected repositories
 
-## Boundary
+Products, runtimes, governance repositories, components, sandboxes, and RTS itself retain local ownership and receive only thin, version-pinned repository adapters.
 
-RTS defines the protocol and canonical reconstructability rules.
+## Current implemented Draft set
 
-RTS-AGE may execute or prepare implementation artifacts.
+- Kernel architecture;
+- Core Constitution;
+- Adapter Contract;
+- Human Authority Contract;
+- Repository Class Policy;
+- Model Migration Policy;
+- Project/State/Tests/AI Profile templates;
+- RTS TRUST_CORE Adapter Draft;
+- protocol inventory;
+- derived read-only HTML view.
 
-Product repositories own their product-specific code and delivery behavior.
+## Permanent safety rules
 
-Component repositories own their own manifests, drives, packs, skills, and design material.
+- no direct default-branch write for material work;
+- no automatic merge or deployment;
+- no self-approval or authority expansion;
+- no automatic RTS canonical write;
+- no signed-history rewrite;
+- no automatic multi-repository mutation;
+- no secrets or protected data without separate authorization;
+- no success claim without evidence;
+- no lowering protection because AI budget is exhausted.
 
-rts-dev-protocol should define development procedure and review discipline across those repositories without absorbing their implementation details.
+## Current decisions
 
-## Minimum Alive Definition
-
-This repository is considered Minimum Alive when:
-
-1. Its role as a development protocol shelf is explicit.
-2. Its boundaries from runtime, product, protocol, and business repositories are clear.
-3. Its next inventory pass is documented.
-4. It can guide AI-assisted development without becoming an execution system.
-5. No runtime behavior, product behavior, or canonical RTS data is changed by the rescue documentation itself.
-
-## Current Decision
-
-Keep this repository.
-
-Treat it as a parts shelf for RTS-compatible development protocol, AI implementation contracts, and review procedures.
-
-Do not expand it into runtime, product, deployment, or business workflow implementation without a separate decision record.
+```text
+TWO_FOUNDATIONAL_CORES_SELECTED
+RTS_IS_TRUST_AND_RECONSTRUCTION_CORE
+RTS_DEVELOPMENT_KERNEL_IS_DEVELOPMENT_FOUNDATION
+RTS_AGE_IS_REPLACEABLE_EXECUTION_ENGINE
+ADAPTER_BASED_REPLACEABILITY_REQUIRED
+SELF_DEVELOPMENT_ALLOWED
+SELF_APPROVAL_PROHIBITED
+RTS_REPOSITORY_UNCHANGED
+DRAFT_PR_REVIEW_AND_NON_CORE_PILOT_NEXT
+```
