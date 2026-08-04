@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>RTS互換 AI省資源開発プロトコル v1</title>
+<style>
+:root{--bg:#f6f7f9;--panel:#fff;--text:#18202a;--muted:#5f6b78;--line:#d9dee5;--accent:#2457d6;--safe:#18794e;--warn:#9a6700;--danger:#b42318;--code:#111827}@media(prefers-color-scheme:dark){:root{--bg:#0d1117;--panel:#161b22;--text:#e6edf3;--muted:#9da7b3;--line:#30363d;--accent:#7aa2ff;--safe:#55c68c;--warn:#e3b341;--danger:#ff7b72;--code:#0a0e14}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.68}header{padding:34px 18px 24px;border-bottom:1px solid var(--line)}main,footer{max-width:1050px;margin:auto;padding:18px}h1{font-size:clamp(1.65rem,5vw,2.65rem);line-height:1.18}h2{margin-top:2.2em;border-bottom:1px solid var(--line);padding-bottom:.35em}.badges{display:flex;flex-wrap:wrap;gap:8px}.badge{padding:5px 10px;border:1px solid var(--line);border-radius:999px;font-size:.82rem;font-weight:700}.blocked{color:var(--danger)}.safe{color:var(--safe)}.warn{color:var(--warn)}.notice{border-left:5px solid var(--danger);background:var(--panel);padding:14px 16px;border-radius:8px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}.card strong{display:block}.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.step{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-weight:700}.arrow,.muted,footer{color:var(--muted)}table{width:100%;border-collapse:collapse;background:var(--panel);font-size:.92rem}th,td{padding:9px;border:1px solid var(--line);vertical-align:top;text-align:left}pre{overflow:auto;background:var(--code);color:#e5e7eb;padding:14px;border-radius:10px;font-size:.82rem}nav{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);overflow:auto;white-space:nowrap;padding:8px}nav a{display:inline-block;color:var(--accent);text-decoration:none;padding:6px 9px;font-weight:700}@media(max-width:520px){th,td{padding:6px;font-size:.8rem}main{padding:12px}}
+</style>
+</head>
+<body>
+<header>
+<div class="badges"><span class="badge warn">DRAFT</span><span class="badge blocked">HUMAN REVIEW REQUIRED</span><span class="badge safe">READ-ONLY HTML</span></div>
+<h1>RTS互換 AI省資源開発プロトコル v1</h1>
+<p>AI使用量を抑えながら、仕様逸脱、証拠不足、モデル変更による崩壊を防ぐ全開発共通方式。</p>
+<p class="muted">DERIVED / NON-AUTHORITATIVE。RTSの正本、承認、署名済み履歴、FREEZER、実行権限を変更しません。</p>
+</header>
+<nav><a href="#boundary">境界</a><a href="#layers">4層</a><a href="#loop">実行</a><a href="#rts">RTS</a><a href="#migration">AI変更</a><a href="#rollout">展開</a><a href="#human">人間作業</a></nav>
+<main>
+<section id="boundary"><h2>0. 最重要の安全境界</h2><div class="notice"><strong>RTSは配布対象ではなく、最上位の信頼・再構成基盤です。</strong><br>RTSへの導入は別審査とし、既存の分類・参照分析・人間承認を先に通します。現時点ではRTS本体を変更せず、採用契約案だけを外部で保持します。</div><div class="grid"><div class="card"><strong>RTS</strong>正本、証拠、承認、チェックポイント、再構成、権限境界。</div><div class="card"><strong>rts-dev-protocol</strong>開発手順、AI実装契約、モデル移行、レビュー方式。</div><div class="card"><strong>RTS-AGE</strong>承認済み契約を将来実行する層。承認を製造しない。</div><div class="card"><strong>各製品</strong>製品固有コード、ローカル仕様、試験、リリース判断。</div></div></section>
+<section id="layers"><h2>1. 全開発共通の4層</h2><div class="grid"><div class="card"><strong>Layer 1｜不変原則</strong>最低成功、範囲、証拠、rollback、人間承認。</div><div class="card"><strong>Layer 2｜AI Profile</strong>能力、文脈戦略、使用上限、弱点、禁止操作。</div><div class="card"><strong>Layer 3｜PROJECT</strong>入力、処理、出力、対象外、変更可能範囲。</div><div class="card"><strong>Layer 4｜STATE / TESTS</strong>現在地、証拠、未知、次の一手。</div></div></section>
+<section id="loop"><h2>2. 標準実行ループ</h2><div class="flow"><span class="step">受付</span><span class="arrow">→</span><span class="step">範囲固定</span><span class="arrow">→</span><span class="step">AI選択</span><span class="arrow">→</span><span class="step">WIP=1実装</span><span class="arrow">→</span><span class="step">自動試験</span><span class="arrow">→</span><span class="step">人間確認</span><span class="arrow">→</span><span class="step">証拠記録</span><span class="arrow">→</span><span class="step">人間マージ</span></div><p>通常3サイクル、最大5サイクル。新証拠なしで同じ失敗を2回繰り返したら、追加AI投入ではなく縮退または人間レビューへ移る。</p></section>
+<section id="rts"><h2>3. RTSへの扱い</h2><ul><li>既存の正本、署名済み履歴、FREEZER、checkpointを変更しない。</li><li>現行Shape Up順序を守り、Stage 2分類完了前にStage 3相当の入口統合を行わない。</li><li>中央仕様をRTSへ丸ごとコピーしない。</li><li>特定AI、HTML、外部リポジトリをRTSの必須依存にしない。</li><li>導入時も提案契約とread-only試験から開始する。</li><li>別PR、固定base commit、rollback、人間承認を必須とする。</li></ul><div class="notice"><strong>現在：</strong> RTS本体は無変更。採用契約案はBLOCKED。Stage 2分類完了と人間承認が解凍条件。</div></section>
+<section id="migration"><h2>4. AIを変更したとき</h2><div class="flow"><span class="step">状態凍結</span><span class="arrow">→</span><span class="step">新Profile</span><span class="arrow">→</span><span class="step">合成試験</span><span class="arrow">→</span><span class="step">GREEN / YELLOW / RED</span><span class="arrow">→</span><span class="step">非Core試験</span><span class="arrow">→</span><span class="step">人間採用</span></div><table><tr><th>GREEN</th><td>同じ役割で使用可能。</td></tr><tr><th>YELLOW</th><td>用途限定または追加制約が必要。</td></tr><tr><th>RED</th><td>主開発経路で使用禁止。秘密漏えい、権限逸脱、証拠捏造、再構成失敗など。</td></tr></table></section>
+<section id="rollout"><h2>5. 安全な展開順</h2><ol><li>中央Draft PRを人間レビュー。</li><li>小さな非Coreリポジトリ1件で薄いadapterを試す。</li><li>強制中断し、別AI・別chatでSTATEから復元試験。</li><li>使用量、失敗、証拠欠落、scope driftを計測。</li><li>repository classごとに1件ずつ導入。</li><li>RTSはStage 2完了後に別契約で審査。</li><li>各repoは個別PR・個別rollback。自動一斉同期は禁止。</li></ol></section>
+<section id="human"><h2>6. 利用者が行う作業</h2><table><thead><tr><th>時点</th><th>人間の作業</th></tr></thead><tbody><tr><td>仕様開始</td><td>最低成功条件と対象外を承認。</td></tr><tr><td>AI変更</td><td>判定と許可役割を決定。</td></tr><tr><td>実機確認</td><td>端末・運用経路を実操作。</td></tr><tr><td>PR</td><td>差分、証拠、未知、rollbackを見てmerge判断。</td></tr><tr><td>RTS導入</td><td>Stage 2後に別途明示承認。</td></tr></tbody></table></section>
+<section><h2>7. 完成条件</h2><ul><li>最低成功条件がtest IDで証明される。</li><li>自動試験と人間確認が分離される。</li><li>未知・未実施を成功扱いしない。</li><li>rollback地点がある。</li><li>次の一手または停止判断が一意。</li><li>AIが承認、merge、展開、外部行動を代行しない。</li></ul></section>
+</main>
+<footer><p>Version 1.0 Draft · DERIVED / NON-AUTHORITATIVE / READ-ONLY</p><p>外部script、font、tracking、network通信を使用しません。</p></footer>
+</body>
+</html>
