@@ -1,0 +1,92 @@
+schema_version: "1.0"
+adapter_contract: "RTS-DEV-KERNEL-ADAPTER-V1"
+status: "DRAFT_INSTANCE"
+
+kernel:
+  version: "1.0"
+  commit: "<fixed-kernel-commit>"
+  architecture: "docs/architecture/RTS_DEVELOPMENT_KERNEL_V1.md"
+  constitution: "docs/contracts/DEVELOPMENT_KERNEL_CORE_CONSTITUTION_V1.md"
+
+repository:
+  full_name: "<owner/repository>"
+  class: "SANDBOX|COMPONENT|PRODUCT|RUNTIME|GOVERNANCE|TRUST_CORE"
+  protection_level: 0
+  base_commit: "<fixed-repository-base-commit>"
+  default_branch: "<branch>"
+  runtime_independent_of_kernel: true
+
+local_contracts:
+  project: "<path-to-PROJECT.yaml>"
+  state: "<path-to-STATE.yaml>"
+  tests: "<path-to-TESTS.yaml>"
+  ai_profile: "<path-to-AI_PROFILE.yaml>"
+
+permissions:
+  allowed:
+    - "inspect"
+    - "propose"
+    - "test_on_task_branch"
+  prohibited:
+    - "direct_default_branch_write"
+    - "automatic_merge"
+    - "automatic_deploy"
+    - "self_approval"
+    - "authority_expansion"
+    - "signed_history_rewrite"
+    - "canonical_rts_write"
+
+scope:
+  read_allowlist: []
+  write_allowlist: []
+  prohibited_paths: []
+  external_network: false
+  secret_access: false
+  protected_data_access: false
+  production_access: false
+
+required_evidence:
+  - "exact_diff"
+  - "automated_test_results"
+  - "human_test_results_when_required"
+  - "input_and_output_hashes"
+  - "rollback_point"
+  - "uncertainty_report"
+  - "human_approval_record"
+
+human_gates:
+  implementation_direction: true
+  merge: true
+  deployment: true
+  publication_or_external_action: true
+  repository_class_change: true
+  authority_change: true
+
+trust_core_overrides:
+  enabled: false
+  fixed_base_commit_required: true
+  proposal_branch_only: true
+  two_stage_human_gate: true
+  signed_history_byte_invariance_required: true
+  checkpoint_byte_invariance_required: true
+  read_only_tests_first: true
+  kernel_runtime_dependency_prohibited: true
+
+compatibility:
+  disposition: "UNTESTED"
+  tested_adapter_ids: []
+  restrictions: []
+
+rollback:
+  method: "<revert-commit-or-reviewed-recovery-procedure>"
+  verified: false
+
+fail_closed_when:
+  - "kernel commit is missing or does not match"
+  - "repository base commit is missing or does not match"
+  - "repository class or protection level is unresolved"
+  - "local contract is missing or invalid"
+  - "requested operation is not explicitly allowed"
+  - "required evidence is missing"
+  - "human approval is missing or mismatched"
+  - "adapter compatibility is UNTESTED or RED for requested material role"
