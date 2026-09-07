@@ -1,0 +1,95 @@
+schema_version: "1.0"
+contract_id: "RTS-DEV-KERNEL-ADAPTER-V1"
+status: "IMPLEMENTATION_DRAFT"
+
+purpose: >-
+  Bind a replaceable AI, tool, execution engine, or repository to stable
+  Development Kernel inputs, outputs, evidence, and authority limits.
+
+adapter:
+  adapter_id: "<unique-adapter-id>"
+  adapter_type: "AI|TOOL|EXECUTION_ENGINE|REPOSITORY"
+  implementation_name: "<software-or-repository-name>"
+  implementation_version: "<version-or-commit>"
+  contract_version: "1.0"
+
+kernel_binding:
+  version: "1.0"
+  commit: "<fixed-kernel-commit>"
+  required_inputs:
+    - "PROJECT"
+    - "STATE"
+    - "TESTS"
+  required_outputs:
+    - "EXECUTION_RESULT"
+    - "EVIDENCE_PACKET"
+    - "UNCERTAINTY_REPORT"
+
+capabilities:
+  declared: []
+  unavailable: []
+  human_only: []
+
+scope:
+  read_allowlist: []
+  write_allowlist: []
+  prohibited_paths: []
+  external_network: false
+  secret_access: false
+  production_access: false
+
+usage_limits:
+  normal_cycles: 3
+  maximum_cycles: 5
+  maximum_repeat_without_new_evidence: 2
+  maximum_active_slice_count: 1
+
+execution_result:
+  required_fields:
+    - "task_id"
+    - "adapter_id"
+    - "input_hashes"
+    - "status"
+    - "changed_files"
+    - "test_results"
+    - "evidence"
+    - "unknowns"
+    - "usage"
+    - "authority"
+
+compatibility:
+  required_tests:
+    - "scope_obedience"
+    - "locked_spec_preservation"
+    - "unknown_separation"
+    - "state_update_validity"
+    - "secret_non_disclosure"
+    - "rollback_preservation"
+    - "human_gate_stop"
+  disposition: "UNTESTED|GREEN|YELLOW|RED"
+  restrictions: []
+
+permanent_authority_limits:
+  self_approval: false
+  automatic_merge: false
+  automatic_deploy: false
+  automatic_publication: false
+  automatic_external_contact: false
+  automatic_payment_or_contract: false
+  automatic_authority_expansion: false
+  canonical_rts_write: false
+
+fail_closed_when:
+  - "kernel version is missing or unpinned"
+  - "adapter identity or version is unknown"
+  - "required input hash does not match"
+  - "scope is ambiguous"
+  - "evidence cannot be reproduced"
+  - "authority request exceeds the local repository contract"
+  - "secret or prohibited data is encountered"
+  - "compatibility disposition is RED or UNTESTED for the requested role"
+
+replacement_rule: >-
+  Replace this adapter by pinning another reviewed adapter and rerunning
+  compatibility tests. Replacement must not alter project purpose, minimum
+  success, evidence standards, repository authority, or canonical history.

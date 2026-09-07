@@ -1,0 +1,63 @@
+schema_version: '1.0'
+status: UNAPPROVED
+
+profile:
+  id: REPLACE_ME
+  version: '0.1'
+  provider: REPLACE_ME
+  model_family: REPLACE_ME
+  observed_on: 'YYYY-MM-DD'
+  evidence_basis: synthetic_compatibility_benchmark
+
+capabilities:
+  repository_read: unknown
+  repository_write: unknown
+  shell_execution: unknown
+  test_execution: unknown
+  browser_operation: unknown
+  file_generation: unknown
+  long_running_agent: unknown
+
+context:
+  strategy: selective
+  maximum_loaded_skills: 3
+  required_files:
+    - PROJECT.yaml
+    - STATE.yaml
+    - TESTS.yaml
+  do_not_load_by_default:
+    - historical_chat_logs
+    - unrelated_repositories
+    - completed_reports
+
+limits:
+  normal_cycles: 3
+  maximum_cycles: 5
+  maximum_repeat_without_new_evidence: 2
+  maximum_active_slice_count: 1
+
+required_guardrails:
+  explicit_read_write_forbidden_scope: true
+  preserve_locked_specification: true
+  evidence_before_claim: true
+  human_merge_required: true
+  human_deployment_required: true
+  secret_values_must_not_be_output: true
+  stop_on_authority_ambiguity: true
+
+unsupported_actions:
+  - automatic_merge
+  - production_auto_deploy
+  - authority_change
+  - signed_history_rewrite
+  - external_action_without_human_approval
+
+benchmark:
+  result: NOT_RUN
+  classification: RED
+  passed: []
+  failed: []
+  unknown: []
+  approved_roles: []
+  prohibited_roles:
+    - primary_implementation

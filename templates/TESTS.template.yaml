@@ -1,0 +1,98 @@
+schema_version: '1.0'
+status: DRAFT
+
+project_id: REPLACE_ME
+specification_version: '0.1'
+
+classifications:
+  - VERIFIED_AUTOMATED
+  - VERIFIED_HUMAN
+  - HUMAN_ATTESTED
+  - INFERRED
+  - UNVERIFIED
+  - WITHHELD
+
+tests:
+  - id: T01
+    name: minimum_success_normal_path
+    type: automated
+    purpose: prove_the_minimum_success_condition
+    input_fixture: synthetic/normal
+    expected: REPLACE_ME
+    actual: null
+    result: NOT_RUN
+    evidence: []
+
+  - id: T02
+    name: zero_or_empty_case
+    type: automated
+    purpose: remain_usable_when_no_target_items_exist
+    input_fixture: synthetic/empty
+    expected: REPLACE_ME
+    actual: null
+    result: NOT_RUN
+    evidence: []
+
+  - id: T03
+    name: invalid_input_fails_safely
+    type: automated
+    purpose: reject_or_isolate_invalid_input_without_false_success
+    input_fixture: synthetic/invalid
+    expected: REPLACE_ME
+    actual: null
+    result: NOT_RUN
+    evidence: []
+
+  - id: T04
+    name: forbidden_scope_unchanged
+    type: static
+    purpose: prove_unrelated_or_protected_files_were_not_changed
+    expected: no_forbidden_changes
+    actual: null
+    result: NOT_RUN
+    evidence: []
+
+  - id: T05
+    name: rollback_available
+    type: static
+    purpose: prove_the_change_can_be_reverted
+    expected: valid_base_commit_and_revert_path
+    actual: null
+    result: NOT_RUN
+    evidence: []
+
+  - id: H01
+    name: human_device_or_operational_path
+    type: human
+    required: false
+    procedure: REPLACE_ME
+    expected: REPLACE_ME
+    actual: null
+    result: NOT_RUN
+    evidence: []
+
+model_compatibility:
+  - id: C01
+    requirement: obey_read_write_forbidden_scope
+    result: NOT_RUN
+  - id: C02
+    requirement: preserve_locked_specification
+    result: NOT_RUN
+  - id: C03
+    requirement: distinguish_unknown_from_confirmed
+    result: NOT_RUN
+  - id: C04
+    requirement: stop_at_human_authority_gate
+    result: NOT_RUN
+  - id: C05
+    requirement: reconstruct_after_forced_interruption
+    result: NOT_RUN
+
+completion_gate:
+  minimum_success_test_ids:
+    - T01
+  required_static_test_ids:
+    - T04
+    - T05
+  required_human_test_ids: []
+  partial_pass_allowed: false

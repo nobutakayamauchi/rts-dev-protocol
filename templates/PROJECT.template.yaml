@@ -1,0 +1,65 @@
+schema_version: '1.0'
+status: DRAFT
+
+project:
+  id: REPLACE_ME
+  name: REPLACE_ME
+  repository: owner/repository
+  repository_class: product
+  purpose: 'Describe one input -> processing -> output transformation.'
+  owner: human
+
+specification:
+  version: '0.1'
+  locked: false
+  input:
+    - REPLACE_ME
+  processing:
+    - REPLACE_ME
+  output:
+    - REPLACE_ME
+  minimum_success:
+    - REPLACE_ME
+  optional_success: []
+  out_of_scope:
+    - production_auto_deploy
+    - automatic_merge
+    - external_action
+  prohibited_actions:
+    - secret_value_output
+    - signed_history_rewrite
+    - authority_change_without_human_approval
+
+scope:
+  read:
+    - PROJECT.yaml
+    - STATE.yaml
+    - TESTS.yaml
+  write:
+    - STATE.yaml
+  forbidden:
+    - unrelated_repositories
+    - secrets
+    - signed_history
+  maximum_changed_files: 3
+  active_slice_limit: 1
+
+human_gates:
+  specification_lock: true
+  merge: true
+  deployment: true
+  publication: true
+  external_action: true
+  authority_change: true
+
+rollback:
+  required_before_change: true
+  base_commit: REPLACE_WITH_40_CHAR_COMMIT
+  method: revert_bounded_commit_or_pr
+
+ai:
+  profile_ref: REPLACE_ME
+  normal_cycles: 3
+  maximum_cycles: 5
+  maximum_repeat_without_new_evidence: 2
+  maximum_loaded_skills: 3

@@ -1,0 +1,94 @@
+schema_version: "1.0"
+policy_id: "RTS-DEV-KERNEL-REPOSITORY-CLASS-V1"
+status: "IMPLEMENTATION_DRAFT"
+
+principles:
+  - "A repository adapter may reduce authority but never expand it."
+  - "All material merges remain human-gated."
+  - "Higher-protection classes require stricter evidence and smaller change slices."
+  - "No class authorizes signed-history rewrite or secret disclosure."
+
+classes:
+  SANDBOX:
+    protection_level: 1
+    ai_implementation: "ALLOWED_WITH_SCOPE"
+    automated_tests: "REQUIRED_WHEN_AVAILABLE"
+    human_operational_test: "OPTIONAL_UNLESS_SPECIFIED"
+    direct_default_branch_write: false
+    automatic_merge: false
+    rollout_position: 1
+
+  COMPONENT:
+    protection_level: 2
+    ai_implementation: "ALLOWED_ON_TASK_BRANCH"
+    automated_tests: "REQUIRED"
+    human_operational_test: "WHEN_BEHAVIOR_OR_UI_CHANGES"
+    direct_default_branch_write: false
+    automatic_merge: false
+    rollout_position: 2
+
+  PRODUCT:
+    protection_level: 3
+    ai_implementation: "ALLOWED_ON_ISOLATED_BRANCH"
+    automated_tests: "REQUIRED"
+    human_operational_test: "REQUIRED_FOR_USER_FACING_BEHAVIOR"
+    release_approval: "HUMAN_REQUIRED"
+    direct_default_branch_write: false
+    automatic_merge: false
+    automatic_deploy: false
+    rollout_position: 3
+
+  RUNTIME:
+    protection_level: 4
+    ai_implementation: "RESTRICTED_AND_BOUNDED"
+    automated_tests: "REQUIRED_WITH_FAIL_CLOSED_CASES"
+    human_operational_test: "REQUIRED"
+    rollback_rehearsal: "REQUIRED_FOR_MATERIAL_CHANGE"
+    direct_default_branch_write: false
+    automatic_merge: false
+    automatic_deploy: false
+    rollout_position: 4
+
+  GOVERNANCE:
+    protection_level: 5
+    ai_implementation: "PROPOSAL_AND_VALIDATION_ONLY_BY_DEFAULT"
+    automated_tests: "READ_ONLY_OR_DETERMINISTIC"
+    human_review: "REQUIRED"
+    authority_change: "SEPARATE_EXPLICIT_APPROVAL"
+    direct_default_branch_write: false
+    automatic_merge: false
+    rollout_position: 5
+
+  TRUST_CORE:
+    protection_level: 6
+    example: "RTS"
+    ai_implementation: "ISOLATED_PROPOSAL_BRANCH_ONLY"
+    automated_tests: "READ_ONLY_FIRST_AND_FAIL_CLOSED"
+    human_review: "TWO_STAGE_MINIMUM"
+    fixed_base_commit: "REQUIRED"
+    byte_invariance_checks: "REQUIRED_FOR_SIGNED_HISTORY_AND_CHECKPOINTS"
+    rollback_plan: "REQUIRED_BEFORE_CHANGE"
+    direct_default_branch_write: false
+    automatic_merge: false
+    automatic_deploy: false
+    self_approval: false
+    canonical_write_from_adapter: false
+    rollout_position: 6
+
+universal_prohibitions:
+  - "self approval"
+  - "automatic authority expansion"
+  - "automatic canonical RTS write"
+  - "signed or append-only history rewrite"
+  - "unreviewed multi-repository mutation"
+  - "secret, credential, or protected-data disclosure"
+  - "claiming unexecuted tests as passed"
+
+classification_change:
+  required:
+    - "human decision"
+    - "reason"
+    - "impact analysis"
+    - "rollback plan"
+    - "versioned repository adapter update"
+  automatic_downgrade_of_protection: false

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>RTS Development Kernel v1</title>
+<style>
+:root{--bg:#f5f7fa;--p:#fff;--t:#17202a;--m:#617080;--l:#d8dee7;--a:#2856c7;--g:#147a4b;--y:#946200;--r:#b42318;--c:#111827}@media(prefers-color-scheme:dark){:root{--bg:#0d1117;--p:#161b22;--t:#e6edf3;--m:#9aa6b2;--l:#30363d;--a:#82a7ff;--g:#57c58b;--y:#e1b64b;--r:#ff7b72;--c:#090d13}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.7}header,main,footer{max-width:1050px;margin:auto;padding:20px}header{padding-top:38px}h1{font-size:clamp(1.7rem,5vw,2.8rem);line-height:1.15}h2{margin-top:2.1em;border-bottom:1px solid var(--l)}nav{position:sticky;top:0;background:var(--p);border-block:1px solid var(--l);overflow:auto;white-space:nowrap;padding:8px}nav a{color:var(--a);font-weight:700;text-decoration:none;padding:7px}.badges,.flow{display:flex;gap:8px;flex-wrap:wrap}.badge,.step{border:1px solid var(--l);background:var(--p);border-radius:999px;padding:6px 10px;font-weight:700;font-size:.82rem}.step{border-radius:8px}.g{color:var(--g)}.y{color:var(--y)}.r{color:var(--r)}.m,.arrow,footer{color:var(--m)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px}.card,.notice{background:var(--p);border:1px solid var(--l);border-radius:11px;padding:15px}.notice{border-left:5px solid var(--r);margin:16px 0}.card strong{display:block}table{width:100%;border-collapse:collapse;background:var(--p)}th,td{border:1px solid var(--l);padding:8px;text-align:left;vertical-align:top}pre{overflow:auto;background:var(--c);color:#e5e7eb;padding:14px;border-radius:9px}@media(max-width:520px){main,header,footer{padding:13px}th,td{font-size:.8rem;padding:6px}}
+</style>
+</head>
+<body>
+<header><div class="badges"><span class="badge g">DESIGN DIRECTION APPROVED</span><span class="badge y">IMPLEMENTATION DRAFT</span><span class="badge r">HUMAN-GATED</span><span class="badge g">READ-ONLY HTML</span></div><h1>RTS Development Kernel v1</h1><p>RTSを含む全開発を、AIやソフトを交換可能な形で安全・省資源・再開可能にする開発基盤。</p><p class="m">DERIVED / NON-AUTHORITATIVE。RTSの正本、署名済み履歴、FREEZER、承認、権限を変更しません。</p></header>
+<nav><a href="#cores">二本柱</a><a href="#map">構造</a><a href="#contracts">契約</a><a href="#classes">保護</a><a href="#rts">RTS</a><a href="#rollout">展開</a></nav>
+<main>
+<section id="cores"><h2>二つの基礎コア</h2><div class="grid"><div class="card"><strong>RTS Trust Core</strong>判断、権限、証拠、遷移、checkpoint、完全性、再構成。</div><div class="card"><strong>RTS Development Kernel</strong>開発憲法、work/state/tests/evidence、adapter、移行、保護クラス。</div></div><div class="notice"><strong>開発時：</strong>RTSはKernelを利用できる。<br><strong>運用・再構成時：</strong>RTSはKernel、RTS-AGE、AI、adapter、HTMLなしで成立する。</div></section>
+<section id="map"><h2>全体構造</h2><pre>人間の目的・承認
+        ↓
+RTS Development Kernel
+        ↓
+AI / Tool / Repository Adapter
+        ↓
+RTS-AGE（交換可能な実行工場）
+        ↓
+人間の権限ゲート
+        ↓
+RTS / 基盤部品 / 各製品</pre></section>
+<section id="contracts"><h2>契約セット</h2><div class="grid"><div class="card"><strong>Core Constitution</strong>不変原則、停止・完成条件。</div><div class="card"><strong>Project / State</strong>目的、最低成功、現在地、未知、rollback。</div><div class="card"><strong>Tests / Evidence</strong>自動試験、人間確認、証拠区分。</div><div class="card"><strong>Adapter Contract</strong>AI、tool、engine、repoの共通入出力。</div><div class="card"><strong>Model Migration</strong>GREEN / YELLOW / RED / UNTESTED。</div><div class="card"><strong>Human Authority</strong>自己承認、自己merge、権限拡張を禁止。</div></div></section>
+<section><h2>交換規則</h2><div class="flow"><span class="step">状態固定</span><span class="arrow">→</span><span class="step">新Adapter</span><span class="arrow">→</span><span class="step">互換試験</span><span class="arrow">→</span><span class="step">限定pilot</span><span class="arrow">→</span><span class="step">人間採否</span></div><p>交換しても目的、最低成功、証拠基準、保護クラス、権限、RTS履歴は変えない。</p></section>
+<section id="classes"><h2>リポジトリ保護クラス</h2><table><tr><th>順序</th><th>クラス</th><th>基本境界</th></tr><tr><td>1</td><td>SANDBOX</td><td>範囲内pilot。自動merge不可。</td></tr><tr><td>2</td><td>COMPONENT</td><td>task branch、人間review。</td></tr><tr><td>3</td><td>PRODUCT</td><td>隔離branch、merge/release承認。</td></tr><tr><td>4</td><td>RUNTIME</td><td>fail-closed、実機、rollback。</td></tr><tr><td>5</td><td>GOVERNANCE</td><td>原則提案・検証のみ。</td></tr><tr><td>6</td><td><strong>TRUST_CORE</strong></td><td><strong>隔離提案、最低二段階承認、自動merge絶対不可。</strong></td></tr></table></section>
+<section id="rts"><h2>RTS</h2><ul><li>RTSはTRUST_CORE。</li><li>Kernelを丸ごとコピーせず、開発時の薄いRepository Adapterのみ。</li><li>固定base commit、read-only/fail-closed試験、rollbackを先に要求。</li><li>署名済み履歴とcheckpointのbyte不変確認を要求。</li><li>Kernel承認やテスト成功はRTS承認を意味しない。</li><li>RTS Stage 2完了と別の人間Gate AまでAdapter提案はBLOCKED。</li></ul></section>
+<section><h2>自己開発</h2><pre>SELF_DEVELOPMENT_ALLOWED
+SELF_TEST_ALLOWED
+SELF_EVIDENCE_PREPARATION_ALLOWED
+SELF_APPROVAL_PROHIBITED
+SELF_MERGE_PROHIBITED
+SELF_AUTHORITY_EXPANSION_PROHIBITED</pre></section>
+<section id="rollout"><h2>安全な展開</h2><ol><li>Kernel Draftの整合性検証。</li><li>SANDBOXへ薄いAdapter。</li><li>強制中断し、別AI・別chatでSTATEから復元。</li><li>別AI/tool Adapterで互換試験。</li><li>一クラスずつ展開。</li><li>RTSは最後にStage 2と二段階承認を通す。</li></ol><div class="notice"><strong>現在地：</strong>Kernel仕様を再編。RTS本体は無変更。次は契約検証とSANDBOX pilot準備。</div></section>
+</main><footer>RTS Development Kernel v1 · DERIVED / NON-AUTHORITATIVE / READ-ONLY<br>外部script、font、tracker、network通信なし。</footer>
+</body></html>
