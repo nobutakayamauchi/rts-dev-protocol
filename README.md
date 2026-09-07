@@ -29,6 +29,7 @@ Use this repository for:
 - repository classification workflows
 - safe iteration procedures
 - rollback and review notes
+- pre-execution security, cost, approval, and audit procedures
 
 Do not use this repository for:
 
@@ -38,6 +39,22 @@ Do not use this repository for:
 - secrets or credentials
 - connector implementation
 - business delivery workflows
+
+## Mandatory pre-execution procedure
+
+Any development path that accepts untrusted content, can spend money, can mutate an external system, or can publish consequential output must follow:
+
+```text
+Security Gate
+→ Cost / Consequence Gate
+→ Explicit Single-Use Approval
+→ Scoped Execution
+→ Outcome Verification + Audit
+```
+
+See [Security → Cost → Approval Development Protocol](docs/security_cost_approval_protocol.md).
+
+The Security Gate always comes first. Inputs that are ambiguous, uninspectable, structurally invalid, or not bound to a verified hash do not proceed to estimation or execution.
 
 ## Current Priority
 
